@@ -19,6 +19,9 @@ class apache::default_mods (
     case $::osfamily {
       'debian': {
         include ::apache::mod::reqtimeout
+        if $apache_version >= 2.4 {
+          ::apache::mod { 'authn_core': }
+        }
       }
       'redhat': {
         include ::apache::mod::actions
